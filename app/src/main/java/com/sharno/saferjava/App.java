@@ -4,19 +4,22 @@ import javax.annotation.Nonnull;
 
 record Person(@Nonnull String name, int age) {}
 
-sealed interface Response permits Success, Failure {}
-record Success(@Nonnull Person person) implements Response {}
-record Failure(@Nonnull String error) implements Response {}
+sealed interface Status permits Pending, Shipped, Delivered {}
+record Pending() implements Status {}
+record Shipped(@Nonnull String carrier) implements Status {}
+record Delivered(@Nonnull long deliveryTime) implements Status {}
 
 public class App {
     public static void main(String[] args) {
-        var name = switch (getData()) {
-            case Success s-> s.person().name();
-            case Failure f -> "default";
+        var message = switch (getOrderStatus()) {
+            case Pending p-> "The order is pending";
+            case Shipped s -> String.format("Order shipped with carrier: %s", s.carrier());
+            case Delivered d -> String.format("Order delivered at timestamp: %d", d.deliveryTime());
         };
+        System.out.println(message);
     }
 
-    static Response getData() {
-        return new Success(new Person("Mohamed", 20));
+    static Status getOrderStatus() {
+        return new Shipped("USPS");
     }
 }
