@@ -2,8 +2,6 @@ package com.sharno.saferjava;
 
 import javax.annotation.Nonnull;
 
-record Person(@Nonnull String name, int age) {}
-
 sealed interface Status permits Pending, Shipped, Delivered {}
 record Pending() implements Status {}
 record Shipped(@Nonnull String carrier) implements Status {}
