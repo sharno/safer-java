@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 sealed interface Status permits Pending, Shipped, Delivered {}
 record Pending() implements Status {}
 record Shipped(@Nonnull String carrier) implements Status {}
-record Delivered(@Nonnull long deliveryTime) implements Status {}
+record Delivered(@Nonnull Long deliveryTime) implements Status {}
 
 public class App {
     public static void main(String[] args) {
