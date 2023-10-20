@@ -10,7 +10,7 @@ record Failure(@Nonnull String error) implements Response {}
 
 public class App {
     public static void main(String[] args) {
-        var x = switch (getData()) {
+        var name = switch (getData()) {
             case Success s-> s.person().name();
             case Failure f -> "default";
         };
