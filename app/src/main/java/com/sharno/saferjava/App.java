@@ -10,7 +10,7 @@ record Delivered(@Nonnull Long deliveryTime) implements Status {}
 public class App {
     public static void main(String[] args) {
         var message = switch (getOrderStatus()) {
-            case Pending p-> "The order is pending";
+            case Pending p -> "The order is pending";
             case Shipped s -> String.format("Order shipped with carrier: %s", s.carrier());
             case Delivered d -> String.format("Order delivered at timestamp: %d", d.deliveryTime());
         };
