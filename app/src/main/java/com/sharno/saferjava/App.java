@@ -9,14 +9,14 @@ record Success(@Nonnull Person person) implements Response {}
 record Failure(@Nonnull String error) implements Response {}
 
 public class App {
-    static Response getData() {
-        return new Success(new Person("Mohamed", 20));
-    }
-
     public static void main(String[] args) {
         var x = switch (getData()) {
-            case Success s-> "";
-            case Failure f -> "";
+            case Success s-> s.person().name();
+            case Failure f -> "default";
         };
+    }
+
+    static Response getData() {
+        return new Success(new Person("Mohamed", 20));
     }
 }
